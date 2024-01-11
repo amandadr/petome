@@ -15,10 +15,10 @@ Have fun :)
 
 ## Screenshots
 ### Title Page
-<img src="https://github.com/amandadr/petome/blob/master/frontend/public/docs/title.jpg?raw=true" height="auto"/>
+<img src="https://github.com/amandadr/petome/blob/master/frontend/public/docs/title.jpg?raw=true" height="auto" width="500" />
 
 ### Making Friends
-<img src="https://github.com/amandadr/petome/blob/master/frontend/public/docs/noctis.jpg?raw=true" height="auto"/>
+<img src="https://github.com/amandadr/petome/blob/master/frontend/public/docs/noctis.jpg?raw=true" height="auto" width="500" />
 
 
 ## Dependencies
