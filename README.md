@@ -9,6 +9,7 @@ Install dependencies with `npm install` in  `/frontend`
 and `bundle install` in `/backend`.
 
 Run the database locally on 3001: `rails s` in `/backend`
+
 Run the app on 3000: `npm start` in `/frontend`
 
 Have fun :)
