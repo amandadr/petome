@@ -39,7 +39,14 @@ module Backend
     # Add the following line to enable the middleware for handling CORS
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins 'https://petome.up.railway.app' and 'https://petome.amandadroy.com'
+        origins 'https://petome.up.railway.app'
+
+        # Add any additional headers or methods that your application requires
+        resource '*', headers: :any, methods: [:get, :post, :put, :patch, :delete, :options]
+
+      end
+      allow do
+        origins 'https://petome.amandadroy.com'
 
         # Add any additional headers or methods that your application requires
         resource '*', headers: :any, methods: [:get, :post, :put, :patch, :delete, :options]
