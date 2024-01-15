@@ -35,6 +35,7 @@ module Backend
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.hosts << "api-petome.amandadroy.com"
 
     # Add the following line to enable the middleware for handling CORS
     config.middleware.insert_before 0, Rack::Cors do
