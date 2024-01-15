@@ -12,7 +12,7 @@ export function getById(id, array) {
 
 export const createGame = (input, dispatch) => {
   const fetchEventsData = axios
-    .get("https://petome-backend-production.up.railway.app//events.json")
+    .get("https://petome-backend-production.up.railway.app/events.json")
     .then((response) => response.data)
     .then((data) => {
       dispatch({ type: ACTIONS.SET_EVENT_DATA, value: data });
@@ -23,7 +23,7 @@ export const createGame = (input, dispatch) => {
     });
 
   const fetchGameData = axios
-    .post("https://petome-backend-production.up.railway.app//games.json", {
+    .post("https://petome-backend-production.up.railway.app/games.json", {
       game: { user: input },
     })
     .then((response) => response.data)
@@ -60,11 +60,11 @@ export const createGame = (input, dispatch) => {
         talk: 0,
         to_pet: -1,
         pet_happy:
-          "https://petome-backend-production.up.railway.app//images/sprites/wolf_happy.png",
+          "https://petome-backend-production.up.railway.app/images/sprites/wolf_happy.png",
         pet_sad:
-          "https://petome-backend-production.up.railway.app//images/sprites/wolf_sad.png",
+          "https://petome-backend-production.up.railway.app/images/sprites/wolf_sad.png",
         pet_neutral:
-          "https://petome-backend-production.up.railway.app//images/sprites/wolf_neutral.png",
+          "https://petome-backend-production.up.railway.app/images/sprites/wolf_neutral.png",
         game_id: gameId,
       },
       {
@@ -76,11 +76,11 @@ export const createGame = (input, dispatch) => {
         talk: 1,
         to_pet: 0,
         pet_happy:
-          "https://petome-backend-production.up.railway.app//images/sprites/cat_happy.png",
+          "https://petome-backend-production.up.railway.app/images/sprites/cat_happy.png",
         pet_sad:
-          "https://petome-backend-production.up.railway.app//images/sprites/cat_sad.png",
+          "https://petome-backend-production.up.railway.app/images/sprites/cat_sad.png",
         pet_neutral:
-          "https://petome-backend-production.up.railway.app//images/sprites/cat_neutral.png",
+          "https://petome-backend-production.up.railway.app/images/sprites/cat_neutral.png",
         game_id: gameId,
       },
       {
@@ -92,11 +92,11 @@ export const createGame = (input, dispatch) => {
         talk: 1,
         to_pet: 1,
         pet_happy:
-          "https://petome-backend-production.up.railway.app//images/sprites/slime_happy.png",
+          "https://petome-backend-production.up.railway.app/images/sprites/slime_happy.png",
         pet_sad:
-          "https://petome-backend-production.up.railway.app//images/sprites/slime_neutral.png",
+          "https://petome-backend-production.up.railway.app/images/sprites/slime_neutral.png",
         pet_neutral:
-          "https://petome-backend-production.up.railway.app//images/sprites/slime_neutral.png",
+          "https://petome-backend-production.up.railway.app/images/sprites/slime_neutral.png",
         game_id: gameId,
       },
     ];
@@ -104,27 +104,26 @@ export const createGame = (input, dispatch) => {
     // Create an array of promises for each pet
     const petRequests = petsData.map((pet) => {
       return axios.post(
-        "https://petome-backend-production.up.railway.app//pets.json",
+        "https://petome-backend-production.up.railway.app/pets.json",
         { pet }
       );
     });
 
-  // Create all pets and return gameId
-  return axios
-    .all(petRequests)
-    .then((responses) => {
-      return gameId;
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-};
+    // Create all pets and return gameId
+    return axios
+      .all(petRequests)
+      .then((responses) => {
+        return gameId;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   // helper that fetches and sets Pet data using gameId
   const fetchPetsData = (gameId) => {
-    
     axios
-      .get("https://petome-backend-production.up.railway.app//pets.json")
+      .get("https://petome-backend-production.up.railway.app/pets.json")
       .then((response) => response.data)
       .then((data) => {
         return data.filter((pet) => pet.game_id === gameId);
@@ -219,5 +218,6 @@ export const react = (dispatch) => {
   );
 };
 
-export const iOS = /iPad|iPhone|iPod/.test(navigator.platform) ||
+export const iOS =
+  /iPad|iPhone|iPod/.test(navigator.platform) ||
   (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);

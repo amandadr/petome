@@ -19,11 +19,10 @@ default: &default
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
-
 # db env comes from Railway
 development:
   <<: *default
-  url: "postgresql://postgres:Eg3Aa1bFg*2d363GFag35Gbd1D-B*5Dg@viaduct.proxy.rlwy.net:33658/railway"
+  url: "postgresql://postgres:-C-b1gBc5641GcgaGdba4DCDBGC1GGc4@roundhouse.proxy.rlwy.net:21243/railway"
   host: <%= ENV["PGHOST"] %>
   database: <%= ENV["PGDATABASE"] %>
   username: <%= ENV["PGUSER"] %>
@@ -32,9 +31,9 @@ development:
 
 test:
   <<: *default
-  host: localhost 
+  host: localhost
   database: backend_test
-  
+
 production:
   <<: *default
   url: <%= ENV["DATABASE_URL"] %>
@@ -43,4 +42,3 @@ production:
   username: <%= ENV["PGUSER"] %>
   password: <%= ENV["PGPASSWORD"] %>
   port: <%= ENV["PGPORT"] %>
-
