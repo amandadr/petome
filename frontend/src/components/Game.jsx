@@ -6,11 +6,14 @@ import "../styles/Game.scss";
 import MoodBar from "./MoodBar";
 
 export default function Game(props) {
-  const { gameId, state, dispatch, ACTIONS } = props;
+  const { setGameId, state, dispatch, ACTIONS } = props;
+  console.log("state", state);
 
   const { event: eventId } = state.game;
+  console.log(eventId);
 
   const event = getById(eventId, state.events);
+  console.log("event", event);
 
   const [fadeIn, setFadeIn] = useState(false);
   const [bg, setBg] = useState(event.img);
@@ -44,7 +47,7 @@ export default function Game(props) {
         )}
       </>
       <Event
-        gameId={gameId}
+        setGameId={setGameId}
         state={state}
         dispatch={dispatch}
         ACTIONS={ACTIONS}

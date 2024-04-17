@@ -4,10 +4,12 @@ import { gamesData } from "../data/games";
 import { eventsData } from "../data/events";
 
 export function getBySpecies(species, array) {
+  // returns a pet object from petsData using species
   return array.find((pet) => pet.species === species);
 }
 
 export function getById(id, array) {
+  // returns an event object from eventsData using id
   return array.find((item) => item.id === id);
 }
 

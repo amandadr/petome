@@ -13,7 +13,16 @@ function App() {
   const { state, dispatch, ACTIONS } = useApplicationData();
 
   let lastGameId = 0;
+
+  if (localStorage.getItem("gameId")) {
+    lastGameId = JSON.parse(localStorage.getItem("gameId"));
+  }
+
   const [gameId, setGameId] = useState(lastGameId);
+  const setGameIdToAll = (gameId) => {
+    localStorage.setItem("gameId", JSON.stringify(gameId));
+    setGameId(gameId);
+  };
 
   const [screen, setScreen] = useState(0);
 
@@ -67,7 +76,7 @@ function App() {
       {screen === 3 && !state.pets[2] && (
         <StartScreen
           gameId={gameId}
-          setGameId={setGameId}
+          setGameId={setGameIdToAll}
           state={state}
           dispatch={dispatch}
           ACTIONS={ACTIONS}
@@ -75,7 +84,7 @@ function App() {
       )}
       {state.pets[2] && screen === 3 && (
         <Game
-          gameId={gameId}
+          setGameId={setGameIdToAll}
           state={state}
           dispatch={dispatch}
           ACTIONS={ACTIONS}

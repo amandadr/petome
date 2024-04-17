@@ -13,12 +13,13 @@ import { CSSTransition } from "react-transition-group";
 import Reaction from "./Reaction";
 
 export default function Event(props) {
-  const { gameId, state, dispatch, ACTIONS } = props;
+  const { setGameId, state, dispatch, ACTIONS } = props;
 
   const {
-    event: eventId,
+    id: gameId,
     user,
     energy,
+    event: eventId,
     isEntering,
     isReacting,
     lastAction,
@@ -28,14 +29,12 @@ export default function Event(props) {
   // get event object from event state
   const event = getById(eventId, state.events);
   // get petId from event species column
-  const petId = event.species
-    ? getBySpecies(event.species, state.pets).id
-    : null;
+  const petSpecies = event.species != null ? event.species : null;
 
   // get pet object from pet state using adoptedPet or petId
-  const pet = adoptedPet(state.pets) || getById(petId, state.pets);
+  const pet = adoptedPet(state.pets) || getById(petSpecies, state.pets);
   // get sprite from petId
-  const sprite = () => {
+  const sprite = (pet) => {
     if (pet.mood <= 4) {
       return pet.pet_sad;
     } else if (pet.mood <= 9 || eventId >= 29) {
@@ -65,7 +64,7 @@ export default function Event(props) {
               });
               // dispatch action to update pet mood and drain energy
               applyDispatch(dispatch, ACTIONS.PERFORM_ACTION, {
-                petId: petId,
+                petId: petSpecies,
                 newMood: pet.mood + pet[option.actionLabel],
                 nextEvent: option.nextEvent,
               });
@@ -152,7 +151,9 @@ export default function Event(props) {
       key={option.text}
       className="option"
       onClick={() => {
-        createGame(gameId, user, dispatch);
+        const newGameId = gameId + 1;
+        setGameId(newGameId);
+        createGame(newGameId, user, dispatch);
       }}
     >
       {option.text}
@@ -200,7 +201,7 @@ export default function Event(props) {
           lastAction={lastAction}
           eventId={eventId}
         />
-        {petId && <img className="sprite" src={sprite()} />}
+        {pet != null && <img className="sprite" src={sprite(pet)} />}
         <div className="event-box">
           <p className="event-dialogue">
             {getById(eventId, state.events).dialogue}
