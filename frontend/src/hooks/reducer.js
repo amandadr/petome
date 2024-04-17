@@ -1,4 +1,4 @@
-import { getById } from "./helpers";
+import { getBySpecies } from "./helpers";
 
 export const ACTIONS = {
   SET_EVENT_DATA: "SET_EVENT_DATA",
@@ -26,7 +26,7 @@ export function reducer(state, action) {
         ...state,
         pets: [
           ...state.pets,
-          (getById(action.value.petId ,state.pets).mood = action.value.newMood),
+          (getBySpecies(action.value.petId ,state.pets).mood = action.value.newMood),
         ],
         game: { ...state.game, energy: state.game.energy - 1 },
       };

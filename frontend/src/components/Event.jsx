@@ -32,7 +32,8 @@ export default function Event(props) {
   const petSpecies = event.species != null ? event.species : null;
 
   // get pet object from pet state using adoptedPet or petId
-  const pet = adoptedPet(state.pets) || getById(petSpecies, state.pets);
+  const pet = adoptedPet(state.pets) ? adoptedPet(state.pets) : getBySpecies(petSpecies, state.pets) || null;
+
   // get sprite from petId
   const sprite = (pet) => {
     if (pet.mood <= 4) {
@@ -201,7 +202,7 @@ export default function Event(props) {
           lastAction={lastAction}
           eventId={eventId}
         />
-        {pet != null && <img className="sprite" src={sprite(pet)} />}
+        {pet && <img className="sprite" src={sprite(pet)} />}
         <div className="event-box">
           <p className="event-dialogue">
             {getById(eventId, state.events).dialogue}
