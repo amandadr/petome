@@ -5,25 +5,24 @@ import intro from "../assets/intro";
 import Typerwriter from "./Typewriter";
 
 export default function StartScreen(props) {
-
   const [run, setRun] = useState(false);
-  
-    useEffect(() => {
-      const onKeyDown = (e) => {
-        if(e.key === '~'){
-          setRun(true);
-          return;
-       }
-       
-       setTimeout(setRun(false), 5000)
-       return;
+
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.key === "~") {
+        setRun(true);
+        return;
       }
 
-      window.addEventListener('keydown', onKeyDown)
-      return () => window.removeEventListener('keydown', onKeyDown)
-     },[run])
+      setTimeout(setRun(false), 5000);
+      return;
+    };
 
-  const { state, dispatch, ACTIONS } = props;
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [run]);
+
+  const { gameId, setGameId, state, dispatch, ACTIONS } = props;
 
   const [user, setUser] = useState("");
 
@@ -43,7 +42,13 @@ export default function StartScreen(props) {
         <form
           onSubmit={(evt) => {
             evt.preventDefault();
-            createGame(document.getElementById("player").value, dispatch);
+            const newGameId = gameId + 1;
+            setGameId(newGameId);
+            createGame(
+              newGameId,
+              document.getElementById("player").value,
+              dispatch
+            );
           }}
         >
           <input

@@ -12,7 +12,9 @@ import "../styles/Event.scss";
 import { CSSTransition } from "react-transition-group";
 import Reaction from "./Reaction";
 
-export default function Event({ state, dispatch, ACTIONS }) {
+export default function Event(props) {
+  const { gameId, state, dispatch, ACTIONS } = props;
+
   const {
     event: eventId,
     user,
@@ -48,37 +50,42 @@ export default function Event({ state, dispatch, ACTIONS }) {
   // play with pet (action options)
   const performAction = (option) => {
     if (!dayActions.includes(option.text)) {
-      return (<button
-        key={option.text}
-        className="option"
-        onClick={() => {
-          if (!dayActions.includes(option.text)) {
-            // fade in pet reaction to action
-            react(dispatch);
-            // set last action to this action label (for reaction)
-            applyDispatch(dispatch, ACTIONS.SET_GAME_STATE, {
-              key: "lastAction",
-              value: pet[option.actionLabel],
-            });
-            // dispatch action to update pet mood and drain energy
-            applyDispatch(dispatch, ACTIONS.PERFORM_ACTION, {
-              petId: petId,
-              newMood: pet.mood + pet[option.actionLabel],
-              nextEvent: option.nextEvent,
-            });
-            // dispatch action to add action to day actions
-            applyDispatch(dispatch, ACTIONS.SET_GAME_STATE, {
-              key: "dayActions",
-              value: [...dayActions, option.text],
-            });
-          }
-        }}
-      >
-        {option.text}
-      </button>
+      return (
+        <button
+          key={option.text}
+          className="option"
+          onClick={() => {
+            if (!dayActions.includes(option.text)) {
+              // fade in pet reaction to action
+              react(dispatch);
+              // set last action to this action label (for reaction)
+              applyDispatch(dispatch, ACTIONS.SET_GAME_STATE, {
+                key: "lastAction",
+                value: pet[option.actionLabel],
+              });
+              // dispatch action to update pet mood and drain energy
+              applyDispatch(dispatch, ACTIONS.PERFORM_ACTION, {
+                petId: petId,
+                newMood: pet.mood + pet[option.actionLabel],
+                nextEvent: option.nextEvent,
+              });
+              // dispatch action to add action to day actions
+              applyDispatch(dispatch, ACTIONS.SET_GAME_STATE, {
+                key: "dayActions",
+                value: [...dayActions, option.text],
+              });
+            }
+          }}
+        >
+          {option.text}
+        </button>
       );
-    };
-    return (<button key={option.text} className="option option-null">{option.text} </button>);
+    }
+    return (
+      <button key={option.text} className="option option-null">
+        {option.text}{" "}
+      </button>
+    );
   };
 
   // onclick, move to next event
@@ -100,22 +107,23 @@ export default function Event({ state, dispatch, ACTIONS }) {
     </button>
   );
   const successEventOptions = (option, eventId) => {
-    return (<button
-      key={option.text}
-      className={option.text === "next" ? "next" : "option"}
-      onClick={() => {
-        applyDispatch(dispatch, ACTIONS.NEXT_EVENT, eventId);
-      }}
-    >
-      {option.text}
-    </button>
+    return (
+      <button
+        key={option.text}
+        className={option.text === "next" ? "next" : "option"}
+        onClick={() => {
+          applyDispatch(dispatch, ACTIONS.NEXT_EVENT, eventId);
+        }}
+      >
+        {option.text}
+      </button>
     );
   };
 
   // onclick, cause sleep ACTION
   const sleep = (option) => (
     <button
-    key={option.text}
+      key={option.text}
       className="option"
       onClick={() => {
         fadeIn(dispatch);
@@ -134,15 +142,17 @@ export default function Event({ state, dispatch, ACTIONS }) {
 
   // onclick, create new game using same player name
   const transition = (option) => (
-    <button key={option.text} className="option option-null">{option.text}</button>
+    <button key={option.text} className="option option-null">
+      {option.text}
+    </button>
   );
 
   const newGame = (option) => (
     <button
-    key={option.text}
+      key={option.text}
       className="option"
       onClick={() => {
-        createGame(user, dispatch);
+        createGame(gameId, user, dispatch);
       }}
     >
       {option.text}
@@ -151,7 +161,6 @@ export default function Event({ state, dispatch, ACTIONS }) {
 
   const optionsArr = JSON.parse(event.options);
   const options = optionsArr.map((option) => {
-
     // if event is sleep event, sleep
     if (eventId === 27) {
       return sleep(option);
@@ -169,11 +178,11 @@ export default function Event({ state, dispatch, ACTIONS }) {
     ) {
       dispatchTimeout(dispatch, ACTIONS.NEXT_EVENT, 29, 1000);
     } else if (eventId === 31 && pet.species === "Wolf") {
-      return successEventOptions(option, 32,);
+      return successEventOptions(option, 32);
     } else if (eventId === 31 && pet.species === "Cat") {
-      return successEventOptions(option, 33,);
+      return successEventOptions(option, 33);
     } else if (eventId === 31 && pet.species === "Slime") {
-      return successEventOptions(option, 34,);
+      return successEventOptions(option, 34);
       // if event is restart? event, create new game
     } else if (eventId === 38) {
       return newGame(option);
@@ -193,7 +202,9 @@ export default function Event({ state, dispatch, ACTIONS }) {
         />
         {petId && <img className="sprite" src={sprite()} />}
         <div className="event-box">
-          <p className="event-dialogue">{getById(eventId, state.events).dialogue}</p>
+          <p className="event-dialogue">
+            {getById(eventId, state.events).dialogue}
+          </p>
           <div className="options-container">{options}</div>
         </div>
       </div>

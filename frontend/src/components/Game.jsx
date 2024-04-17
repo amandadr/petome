@@ -6,7 +6,7 @@ import "../styles/Game.scss";
 import MoodBar from "./MoodBar";
 
 export default function Game(props) {
-  const { state, dispatch, ACTIONS } = props;
+  const { gameId, state, dispatch, ACTIONS } = props;
 
   const { event: eventId } = state.game;
 
@@ -17,7 +17,7 @@ export default function Game(props) {
 
   useEffect(() => {
     setFadeIn(true);
-    setBg(prevBg => prevBg !== event.img && event.img);
+    setBg((prevBg) => prevBg !== event.img && event.img);
 
     setTimeout(() => {
       setFadeIn(false);
@@ -43,7 +43,12 @@ export default function Game(props) {
           <UserStats game={state.game} dispatch={dispatch} ACTIONS={ACTIONS} />
         )}
       </>
-      <Event state={state} dispatch={dispatch} ACTIONS={ACTIONS} />
+      <Event
+        gameId={gameId}
+        state={state}
+        dispatch={dispatch}
+        ACTIONS={ACTIONS}
+      />
     </div>
   );
 }
