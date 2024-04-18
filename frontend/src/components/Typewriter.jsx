@@ -1,23 +1,5 @@
 import { useState, useEffect } from "react";
 
-// export default function Typerwriter({ text }) {
-//   const [index, setIndex] = useState(0);
-//   const [displayText, setDisplayText] = useState("");
-
-//   useEffect(() => {
-//     if (index < text.length) {
-//       setTimeout(() => {
-//         setDisplayText(prevDisplayText => prevDisplayText + text[index]);
-//         setIndex(prevIndex => prevIndex + 1);
-//       }, 50);
-
-//       return () => clearTimeout();
-//     }
-//   }, [index, text]);
-
-//   return <span>{text}</span>
-// }
-
 const Typewriter = ({ text, delay, infinite }) => {
   const [currentText, setCurrentText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -32,11 +14,12 @@ const Typewriter = ({ text, delay, infinite }) => {
       }, delay);
 
     } 
-    // else if (infinite) { // ADD THIS CHECK
-    //   setCurrentIndex(0);
-    //   setCurrentText('');
-    // }
-
+    else if (infinite) {
+      timeout = setTimeout(() => {
+        setCurrentText('');
+        setCurrentIndex(0);
+      }, delay);
+    }
     return () => clearTimeout(timeout);
   }, [currentIndex, delay, infinite, text]);
 

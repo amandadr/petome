@@ -7,13 +7,10 @@ import MoodBar from "./MoodBar";
 
 export default function Game(props) {
   const { setGameId, state, dispatch, ACTIONS } = props;
-  console.log("state", state);
 
   const { event: eventId } = state.game;
-  console.log(eventId);
 
   const event = getById(eventId, state.events);
-  console.log("event", event);
 
   const [fadeIn, setFadeIn] = useState(false);
   const [bg, setBg] = useState(event.img);
@@ -37,7 +34,6 @@ export default function Game(props) {
         backgroundPosition: "center center",
       }}
     >
-      {/* <img className="background" src={event.img}/> */}
       <>
         {(eventId === 24 || eventId === 25 || eventId === 26) && (
           <MoodBar event={event} pets={state.pets} />

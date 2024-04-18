@@ -29,19 +29,6 @@ function App() {
   const [playSound] = useSound(mySound, { volume: 0.2 });
 
   useEffect(() => {
-    // const onKeyDown = (e) => {
-    //   if(e.key && screen < 3){
-    //     setScreen(screen + 1);
-    //     return
-    //    }
-
-    //    if(e.key && screen === 3){
-    //     return () => window.removeEventListener('keydown', onKeyDown)
-    //    }
-
-    //    return
-    //  }
-
     const onClick = (e) => {
       if (
         (e.pointerType === "mouse" || e.pointerType === "touch" || iOS) &&
@@ -61,7 +48,6 @@ function App() {
       return;
     };
 
-    // window.addEventListener('keydown', onKeyDown)
     window.addEventListener("click", onClick);
     return () => window.removeEventListener("click", onClick);
   }, [screen]);
