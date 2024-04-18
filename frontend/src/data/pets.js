@@ -8,11 +8,11 @@ export const petsData = (gameId) => [
     talk: 0,
     to_pet: -1,
     pet_happy:
-      "https://petome-backend-production.up.railway.app/images/sprites/wolf_happy.png",
+      "https://raw.githubusercontent.com/amandadr/petome/deployment/frontend/public/images/sprites/wolf_happy.png?raw=true",
     pet_sad:
-      "https://petome-backend-production.up.railway.app/images/sprites/wolf_sad.png",
+      "https://raw.githubusercontent.com/amandadr/petome/deployment/frontend/public/images/sprites/wolf_sad.png?raw=true",
     pet_neutral:
-      "https://petome-backend-production.up.railway.app/images/sprites/wolf_neutral.png",
+      "https://raw.githubusercontent.com/amandadr/petome/deployment/frontend/public/images/sprites/wolf_neutral.png?raw=true",
     game_id: gameId,
   },
   {
@@ -24,11 +24,11 @@ export const petsData = (gameId) => [
     talk: 1,
     to_pet: 0,
     pet_happy:
-      "https://petome-backend-production.up.railway.app/images/sprites/cat_happy.png",
+      "https://raw.githubusercontent.com/amandadr/petome/deployment/frontend/public/images/sprites/cat_happy.png?raw=true",
     pet_sad:
-      "https://petome-backend-production.up.railway.app/images/sprites/cat_sad.png",
+      "https://raw.githubusercontent.com/amandadr/petome/deployment/frontend/public/images/sprites/cat_sad.png?raw=true",
     pet_neutral:
-      "https://petome-backend-production.up.railway.app/images/sprites/cat_neutral.png",
+      "https://raw.githubusercontent.com/amandadr/petome/deployment/frontend/public/images/sprites/cat_neutral.png?raw=true",
     game_id: gameId,
   },
   {
@@ -40,11 +40,11 @@ export const petsData = (gameId) => [
     talk: 1,
     to_pet: 1,
     pet_happy:
-      "https://petome-backend-production.up.railway.app/images/sprites/slime_happy.png",
+      "https://raw.githubusercontent.com/amandadr/petome/deployment/frontend/public/images/sprites/slime_happy.png?raw=true",
     pet_sad:
-      "https://petome-backend-production.up.railway.app/images/sprites/slime_neutral.png",
+      "https://raw.githubusercontent.com/amandadr/petome/deployment/frontend/public/images/sprites/slime_neutral.png?raw=true",
     pet_neutral:
-      "https://petome-backend-production.up.railway.app/images/sprites/slime_neutral.png",
+      "https://raw.githubusercontent.com/amandadr/petome/deployment/frontend/public/images/sprites/slime_neutral.png?raw=true",
     game_id: gameId,
   },
 ];
