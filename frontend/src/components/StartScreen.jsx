@@ -35,7 +35,7 @@ export default function StartScreen(props) {
       </p> */}
         <img
           src={
-            "https://petome-backend-production.up.railway.app/images/sprites/slime_neutral.png"
+            "https://raw.githubusercontent.com/amandadr/petome/deployment/frontend/public/images/sprites/slime_neutral.png?raw=true"
           }
           className="mascot"
         />
